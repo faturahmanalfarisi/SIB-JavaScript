@@ -1,0 +1,28 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>IF</title>
+    </head>
+    <body>
+        <script>
+            let pelanggan = "XiaoNai"
+            let totalBelanja = 10000;
+            let keterangan = "";
+            
+            //jika total belanja pelanggan lebih dari 5000, maka "Selamat XiaoNai Anda mendapatkan hadiah", 
+            // Selain itu "Terimakasih XiaoNai telah berbelanja di toko kami"
+
+            if (totalBelanja > 5000) {
+                keterangan = "Selamat " + pelanggan + ", Anda mendapatkan hadiah";
+                
+            } else {
+                keterangan = "Terimakasih " + pelanggan + " telah berbelanja di toko kami";
+            }
+
+            document.write(keterangan);
+
+        </script>
+    </body>
+    </html>

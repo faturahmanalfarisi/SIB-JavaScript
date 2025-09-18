@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IF Kondisi</title>
+</head>
+<body>
+    <!-- 
+    Jika umur lebih dari 20 tahun maka anda dapat mengendarai mobil 
+    Jika umur lebih dari 17 tahun maka anda dapat mengendarai motor
+    Jika umur lebih dari 10 tahun maka anda dapat mengendarai sepeda
+    selain it tidak boleh 
+    -->
+    <script>
+        // let umur = 18; //Ubah Umur untuk mengetes kondisi
+        let umur = prompt("Masukkan Umur Anda :"); //Ubah Umur untuk mengetes kondisi
+        if (umur >= 19) {
+            document.write("Anda boleh mengendarai mobil");
+        } 
+        else if (umur >= 17) {
+            document.write("Anda boleh mengendarai motor");
+        } 
+        else if (umur >= 10) {
+            document.write("Anda boleh mengendarai sepeda");
+        }
+        else {
+            document.write("Anda tidak boleh mengendarai Apapun");         
+        }
+    </script>
+
+</body>
+</html>

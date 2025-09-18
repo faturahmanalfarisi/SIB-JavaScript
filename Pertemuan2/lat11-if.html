@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IF Nested</title>
+</head>
+<body>
+    <script>
+        let username = prompt("Masukkan username : ");
+        let password = prompt("Masukkan password : ");
+
+        //jika username dan password benar, maka "Selamat datang di aplikasi kami"
+        //jika username benar dan password salah, maka "Password yang anda masukkan salah"  
+        //jika username salah dan password benar, maka "Username yang anda masukkan salah"
+        //jika username dan password salah, maka "Username dan Password yang anda masukkan salah"  
+        if (username == "Fatur") {
+            if (password == "12345") {
+                document.write("Selamat datang di WebSite kami " + username);
+            } 
+            else {
+                document.write("Password yang anda masukkan salah, Silahkah coba lagi" );
+            }
+        } 
+        else {
+            // if (password == "12345") {
+            //     document.write("Username yang anda masukkan salah, Silahkah coba lagi");
+            // } 
+            // else {
+             document.write("Anda Belum terdaftar, Silahkah coba lagi");
+            // }
+        }
+
+    </script>
+
+</body>
+</html>

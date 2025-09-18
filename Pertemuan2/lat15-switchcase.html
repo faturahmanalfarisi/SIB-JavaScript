@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembelian Barang - Switch Case</title>
+</head>
+<body>
+    <script>
+        let pembeli = "Kasino";
+        let barang = "Motor"; // Pastikan kapitalisasi sama dengan case
+        let harga_satuan = 0;
+
+        switch(barang){
+            case "TV":
+                harga_satuan = 3000000;
+                break;
+            case "Motor":
+                harga_satuan = 12000000;
+                break;
+            case "Kulkas":
+                harga_satuan = 4000000;
+                break;
+            default:
+                document.write("<h2>Barang tidak tersedia</h2>");
+                harga_satuan = 0;
+        }
+
+        let jml_beli = 10;
+        let bruto = harga_satuan * jml_beli;
+        let ppn = bruto * 0.11;
+
+        // Diskon sesuai barang
+        let diskon = 0;
+        if (barang == "TV") diskon = 0.3 * bruto;
+        else if (barang == "Motor") diskon = 0.2 * bruto;
+        else if (barang == "Kulkas") diskon = 0.05 * bruto;
+        else diskon = 0;
+
+        let hasil_diskon = bruto - diskon;
+        let total_akhir = hasil_diskon + ppn;
+
+        // Format angka
+        function formatRupiah(angka) {
+            return "Rp " + angka.toLocaleString('id-ID');
+        }
+
+        document.write("<h1>Data Pembelian</h1>");
+        document.write(
+            "<br>Pembeli: " + pembeli +
+            "<br>Barang: " + barang +
+            "<br>Jumlah Beli Barang: " + jml_beli +
+            "<br>Harga Satuan: " + formatRupiah(harga_satuan) +
+            "<br>Total Harga: " + formatRupiah(bruto) +
+            "<br>Diskon: " + formatRupiah(diskon) +
+            "<br>PPN (11%): " + formatRupiah(ppn) +
+            "<br>Total setelah diskon: " + formatRupiah(hasil_diskon) +
+            "<br><b>Total Bayar (setelah diskon + PPN): " + formatRupiah(total_akhir) + "</b>"
+        );
+    </script>
+</body>
+</html>

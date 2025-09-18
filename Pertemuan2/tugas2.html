@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas 2 - Data Pegawai</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h2 {
+            text-align: center;
+        }
+        table {
+            width: 80%; 
+            margin: 20px auto; 
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-transform: capitalize; 
+        }
+        tfoot tr td {
+            text-align: right;
+            font-weight: bold;
+        }
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2 class="text-center">Data Pegawai</h2>
+    <hr/>
+
+    <script>
+        // Ambil input dari user menggunakan prompt()
+        var nama = prompt("Masukkan nama pegawai:");
+        var umur = prompt("Masukkan umur pegawai:");
+        var jabatan = prompt("Masukkan jabatan (Manajer/Asisten Manajer/Staff):");
+        var status = prompt("Masukkan status (Menikah/Lajang):");
+
+        var gapok = 0;
+        var tunjanganJabatan, bpjs, tunjanganKeluarga, totalGaji;
+
+        // Logika IF...ELSE IF untuk menentukan gaji pokok
+        if(jabatan.toLowerCase() === "manajer"){
+            gapok = 15000000;
+        } else if(jabatan.toLowerCase() === "asisten manajer"){
+            gapok = 10000000;
+        } else if(jabatan.toLowerCase() === "staff"){
+            gapok = 5000000;
+        } else {
+            gapok = 0; // Gaji pokok 0 jika jabatan tidak sesuai
+        }
+
+        // Hitung tunjangan
+        tunjanganJabatan = 0.15 * gapok;
+        bpjs = 0.10 * gapok;
+
+        // Operator ternary untuk tunjangan keluarga
+        tunjanganKeluarga = (status.toLowerCase() === "menikah") ? (0.20 * gapok) : 0;
+
+        // Hitung total gaji
+        totalGaji = gapok + tunjanganJabatan + bpjs + tunjanganKeluarga;
+
+        // Fungsi untuk memformat angka menjadi mata uang Rupiah
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(angka);
+        }
+
+        // Cetak tabel 
+        document.write("<table border='1' cellspacing='0' cellpadding='5'>");
+        document.write("<thead>");
+        document.write("<tr>");
+        document.write("<th>Nama Pegawai</th>");
+        document.write("<th>Umur</th>");
+        document.write("<th>Jabatan</th>");
+        document.write("<th>Status</th>");
+        document.write("<th>Gaji Pokok</th>");
+        document.write("<th>Tunjangan Jabatan</th>");
+        document.write("<th>BPJS</th>");
+        document.write("<th>Tunjangan Keluarga</th>");
+        document.write("<th>Total Gaji</th>");
+        document.write("</tr>");
+        document.write("</thead>");
+
+        document.write("<tbody>");
+        document.write("<tr>");
+        document.write("<td>" + nama + "</td>");
+        document.write("<td>" + umur + "</td>");
+        document.write("<td>" + jabatan + "</td>");
+        document.write("<td>" + status + "</td>");
+        document.write("<td>" + formatRupiah(gapok) + "</td>");
+        document.write("<td>" + formatRupiah(tunjanganJabatan) + "</td>");
+        document.write("<td>" + formatRupiah(bpjs) + "</td>");
+        document.write("<td>" + formatRupiah(tunjanganKeluarga) + "</td>");
+        document.write("<td>" + formatRupiah(totalGaji) + "</td>");
+        document.write("</tr>");
+        document.write("</tbody>");
+
+        document.write("<tfoot>");
+        document.write("<tr>");
+        document.write("<td colspan='8' class='text-center'><b>Total Gaji</b></td>");
+        document.write("<td><b>" + formatRupiah(totalGaji) + "</b></td>");
+        document.write("</tr>");
+        document.write("</tfoot>");
+        document.write("</table>");
+    </script>
+</body>
+</html>

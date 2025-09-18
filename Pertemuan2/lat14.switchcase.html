@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swtich Case</title>
+</head>
+<body>
+    <!-- switch case: sebagai pengecekan sebuah nilai -->
+    <!-- break: stop/untuk pemberhentian dari suatu perulangan pada switch case -->
+    <!-- case/elseif -->
+    <!-- default/else -->
+
+    <script>
+    // let ukuran = "L"; //nilai input berupa jenis pakaian 
+    // let ukuran = prompt("Masukkan ukuran baju (L/M/S): "); //nilai input berupa jenis pakaian
+    // switch(ukuran){
+    //     case "L":
+    //     case "l":
+    //         document.write("Large");
+    //         break;
+    //     case "M":
+    //     case "m":
+    //         document.write("Medium");
+    //         break;
+    //     default:
+    //         document.write("Small");    
+    // }
+    </script>
+    <hr>
+    <script>
+        switch(new Date().getDay()){
+            case 0:
+                document.write("Minggu");
+                break;
+            case 1:
+                document.write("Senin");
+                break;
+            case 2:
+                document.write("Selasa");
+                break;
+            case 3:
+                document.write("Rabu");
+                break;
+            case 4:
+                document.write("Kamis");
+                break;
+            case 5:
+                document.write("Jumat");
+                break;
+            case 6:
+                document.write("Sabtu");
+                break;
+            default:
+                document.write("Error");
+        }
+        document.write("<br>Hari ke-"+new Date().getDay());
+    </script>
+</body>
+</html>
