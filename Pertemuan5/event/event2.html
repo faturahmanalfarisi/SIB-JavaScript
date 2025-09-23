@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Object</title>
+</head>
+<body>
+    
+    <div id="parent" style="padding: 20px;">
+        Parent Div
+        <div id="child" style="padding: 10px;">
+            Child Div (Klik Saya)
+        </div>
+    </div>
+
+
+    <button id="myButton">Klik</button>
+    <a href="https://www.google.com" id="myLink">Klik Link</a>
+
+    <script>
+
+        document.getElementById("parent").addEventListener("click", function(){
+            alert("Event juga terjadi di parent");
+        });
+        document.getElementById("child").addEventListener("click", function(){
+            event.stopPropagation();
+            alert("Hanya element ini yang di klik")
+        });
+        document.getElementById("myButton").addEventListener("click", function(event){
+            console.log("Event Type: ", event.type);
+            console.log("Element Target :", event.target);
+        });
+
+        document.getElementById("myLink").addEventListener("clik", function(event){
+            event.preventDefault();
+            alert("Tautan tidak akan diarahkan");
+        })
+    </script>
+</body>
+</html>

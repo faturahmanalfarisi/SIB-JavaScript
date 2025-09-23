@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tugas 5 JS - Manajemen Produk</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
+    h1 { color: #0b5ed7; }
+    .card { border: 1px solid #ddd; padding: 12px; border-radius: 8px; margin-bottom: 12px; }
+    label { display: block; margin-top: 8px; }
+    input[type="text"], input[type="number"] { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
+    button { margin-top: 10px; padding: 8px 12px; cursor: pointer; }
+    .produk-item { display:flex; justify-content:space-between; align-items:center; padding:8px; border-bottom:1px solid #eee; }
+    .produk-info { font-size: 14px; }
+    .btn-delete { background: #ff6b6b; border: none; color: white; padding:6px 10px; border-radius:6px; cursor:pointer; }
+    .controls { margin-bottom: 12px; display:flex; gap:10px; }
+    .small-muted { font-size:12px; color:#666; }
+    pre { background:#f7f7f7; padding:8px; border-radius:6px; overflow:auto; }
+  </style>
+</head>
+<body>
+
+  <h1>Tugas 5 JS — Manajemen Produk</h1>
+  <p class="small-muted">Fitur: list produk awal minimal 5, tambah produk, hapus produk, tampilkan semua.</p>
+
+  <div class="card">
+    <h3>Tambah Produk</h3>
+    <form id="productForm">
+      <label for="nama">Nama Produk</label>
+      <input type="text" id="nama" name="nama" required />
+      <label for="harga">Harga</label>
+      <input type="number" id="harga" name="harga" min="0" required />
+      <label for="stok">Stok</label>
+      <input type="number" id="stok" name="stok" min="0" required />
+      <button type="submit">Tambah Produk</button>
+    </form>
+  </div>
+
+  <div class="controls">
+    <button id="showAll">Tampilkan Semua Produk</button>
+    <button id="addSample">Tambah Contoh (3 Produk sekaligus)</button>
+  </div>
+
+  <div class="card">
+    <h3>Daftar Produk</h3>
+    <div id="productList"></div>
+  </div>
+
+  <div class="card">
+    <h3>Output</h3>
+    <pre id="consoleView"></pre>
+  </div>
+
+<script>
+let produkList = [
+  { id: 1, nama: "Laptop", harga: 7500000, stok: 10 },
+  { id: 2, nama: "Smartphone", harga: 5000000, stok: 5 },
+  { id: 3, nama: "Tablet", harga: 3000000, stok: 7 },
+  { id: 4, nama: "Headphone", harga: 250000, stok: 20 },
+  { id: 5, nama: "Mouse", harga: 75000, stok: 30 }
+];
+let nextId = Math.max(...produkList.map(p => p.id)) + 1;
+
+function writeConsole(text) {
+  const el = document.getElementById('consoleView');
+  const now = new Date().toLocaleTimeString();
+  el.textContent = now + " — " + text + "\n" + el.textContent;
+}
+
+function tampilkanProduk() {
+  const container = document.getElementById('productList');
+  container.innerHTML = '';
+  if (produkList.length === 0) {
+    container.innerHTML = '<div class="small-muted">Tidak ada produk.</div>';
+    return;
+  }
+  for (const { id, nama, harga, stok } of produkList) {
+    const div = document.createElement('div');
+    div.className = 'produk-item';
+    div.innerHTML = `
+      <div class="produk-info">
+        <strong>${nama}</strong><br/>
+        Harga: Rp ${harga.toLocaleString()} • Stok: ${stok}
+      </div>
+      <div>
+        <button class="btn-delete" data-id="${id}">Hapus</button>
+      </div>
+    `;
+    container.appendChild(div);
+  }
+  writeConsole('Menampilkan ' + produkList.length + ' produk');
+}
+
+function tambahProduk(...produkBaru) {
+  const withId = produkBaru.map(p => ({ id: nextId++, ...p }));
+  produkList = [...produkList, ...withId];
+  writeConsole('Produk ditambahkan: ' + withId.map(p => p.nama).join(', '));
+  return withId;
+}
+
+function hapusProduk(id) {
+  produkList = produkList.filter(p => p.id !== id);
+  writeConsole(`Hapus produk id=${id}`);
+  tampilkanProduk();
+}
+
+document.getElementById('productForm').addEventListener('submit', function (event) {
+  event.preventDefault();
+  const form = event.target;
+  const nama = form.nama.value.trim();
+  const harga = Number(form.harga.value);
+  const stok = Number(form.stok.value);
+  if (!nama || isNaN(harga) || harga < 0 || isNaN(stok) || stok < 0) {
+    alert('Input tidak valid');
+    return;
+  }
+  tambahProduk({ nama, harga, stok });
+  form.reset();
+  tampilkanProduk();
+});
+
+document.getElementById('showAll').addEventListener('click', function () {
+  tampilkanProduk();
+  console.table(produkList);
+  writeConsole('Console.table dipanggil');
+});
+
+document.getElementById('addSample').addEventListener('click', function () {
+  tambahProduk(
+    { nama: 'Smartwatch', harga: 1200000, stok: 8 },
+    { nama: 'Charger', harga: 50000, stok: 50 },
+    { nama: 'Keyboard', harga: 150000, stok: 15 }
+  );
+  tampilkanProduk();
+});
+
+document.getElementById('productList').addEventListener('click', function (event) {
+  if (event.target && event.target.matches('.btn-delete')) {
+    const id = Number(event.target.dataset.id);
+    if (!isNaN(id)) {
+      const ok = confirm('Yakin ingin menghapus produk ini?');
+      if (ok) hapusProduk(id);
+    }
+  }
+});
+
+tampilkanProduk();
+
+window.tambahProduk = tambahProduk;
+window.hapusProduk = hapusProduk;
+window.tampilkanProduk = tampilkanProduk;
+window.produkList = produkList;
+</script>
+</body>
+</html>
