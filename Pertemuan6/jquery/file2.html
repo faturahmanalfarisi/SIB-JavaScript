@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Selector Hirarki</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+    <div>
+        <h2>Judul</h2>
+        <p>Paragraph dalam div</p>
+    </div>
+
+    <p>Paragraph diluar div</p>
+
+    <button id="ubah">Sorot Paragraph di dalam Div</button>
+
+    <script>
+        $(document).ready(function(){
+            $("#ubah").click(function(){
+                $("div p").css("background", "yellow");
+            });
+        });
+    </script>
+</body>
+</html>

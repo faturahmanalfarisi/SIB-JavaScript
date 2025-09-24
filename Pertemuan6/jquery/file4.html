@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+    </ul>
+
+    <button id="higlight">Bilangan Genap</button>
+
+    <script>
+        $(document).ready(function(){
+            $("#higlight").click(function(){
+                $("li:even").css("background", "lightblue");
+            })
+        })
+    </script>   
+</body>
+</html>
